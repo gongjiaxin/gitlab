@@ -1,0 +1,31 @@
+安装之前增加虚拟内存
+ dd if=/dev/zero of=swap bs=1M count=800
+
+mkswap swap 
+swapon swap 
+vim /etc/fstab 
+
+/mnt/swap/swap swap swap  defaults  0 0
+
+
+
+官方网站 https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-11.5.0-ce.0.el7.x86_64.rpm
+一、下载安装
+curl -s https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+yum -y install gitlab-ce-11.5.0-ce.0.el7.x86_64
+
+wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-11.5.0-ce.0.el7.x86_64.rpm/download.rpm
+
+二、运行
+
+初始化  gitlab-ctl reconfigure
+运行	gitlab-ctl start
+修改端口        vim /var/opt/gitlab/nginx/conf/nginx.conf
+ 		vim /var/opt/gitlab/nginx/conf/gitlab-http.conf
+
+修改主机配置文件 /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+
+修改主机配置文件  /etc/gitlab/gitlab.rb
+
+gitlab-ctl restart 重启
+
