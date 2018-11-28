@@ -1,0 +1,64 @@
+[root@jiaxin data-ci]# chmod 777 eatjoys-front.sh 
+docker exec -it e445c055803d  /bin/bash
+su gitlab-runner//进入这个用户创建密钥
+$ ssh-keygen 
+vim /home/gitlab-runner/.ssh/id_rsa.pub 复制到47.99.89.247
+测试连接 ssh root@ 47.99.89.247
+
+ gitlab 上面新建立文件名  .gitlab-ci.yml 
+
+stages:
+  - test
+  - deploy
+
+构建预发布环境:
+  stage: test
+  script:
+    - /data-ci/eatjoys-front.sh 0
+  only:
+    - master
+  tags:
+    - eatjoys-front-erp
+
+构建生产环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh 1
+  environment:
+    name: production
+  only:
+    - master
+  when: manual
+  tags:
+    - eatjoys-front-erp
+
+构建考拉生产环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh 2
+  environment:
+    name: production
+  only:
+    - master
+  when: manual
+  tags:
+    - eatjoys-front-erp
+    
+测试环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh
+  only:
+    - /^release-.*$/
+    - release
+  tags:
+    - eatjoys-front-erp
+
+开发环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh
+  only:
+    - develop
+  tags:
+    - eatjoys-front-erp 
