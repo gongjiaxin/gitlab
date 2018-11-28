@@ -1,0 +1,55 @@
+stages:
+  - test
+  - deploy
+
+构建预发布环境:
+  stage: test
+  script:
+    - /data-ci/eatjoys-front.sh 0
+  only:
+    - master
+  tags:
+    - eatjoys-front-erp
+
+构建生产环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh 1
+  environment:
+    name: production
+  only:
+    - master
+  when: manual
+  tags:
+    - eatjoys-front-erp
+
+构建考拉生产环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh 2
+  environment:
+    name: production
+  only:
+    - master
+  when: manual
+  tags:
+    - eatjoys-front-erp
+    
+测试环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh
+  only:
+    - /^release-.*$/
+    - release
+  tags:
+    - eatjoys-front-erp
+
+开发环境:
+  stage: deploy
+  script:
+    - /data-ci/eatjoys-front.sh
+  only:
+    - develop
+  tags:
+    - eatjoys-front-erp 
