@@ -1,0 +1,33 @@
+docker pull gitlab/gitlab-runne
+
+docker run -d -v /data-ci:/data-ci --restart=always --name gitlab-runner gitlab/gitlab-runner
+
+
+docker exec -it e445c055803d gitlab-runner --help
+docker exec -it e445c055803d gitlab-runner --list
+
+
+
+[root@jiaxin eatjoys-front-erp]# docker exec -it e445c055803d gitlab-runner  register
+Runtime platform                                    arch=amd64 os=linux pid=38 revision=3afdaba6 version=11.5.0
+Running in system-mode.                            
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+http://47.99.145.156:9999/
+Please enter the gitlab-ci token for this runner:
+QQezi4BgQKtZffEcUyBC
+Please enter the gitlab-ci description for this runner:
+[e445c055803d]: eatjoys-front-erp
+Please enter the gitlab-ci tags for this runner (comma separated):
+eatjoys-front-erp
+Registering runner... succeeded                     runner=QQezi4Bg
+Please enter the executor: virtualbox, docker+machine, docker-ssh+machine, docker-ssh, parallels, shell, docker, ssh, kubernetes:
+shell
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded! 
+
+
+
+
+
+
+
