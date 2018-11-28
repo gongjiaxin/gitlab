@@ -1,0 +1,87 @@
+http://nginx.org/en/download.html
+[root@sannian eatjoys-front-erp]# cd /usr/local/src/
+[root@sannian src]# wget http://nginx.org/download/nginx-1.14.1.tar.gz
+
+安装依赖
+yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel
+
+./configure --prefix=/usr/local/nginx
+
+make
+make install 
+
+cp /usr/local/nginx/sbin/nginx  /usr/bin/nginx
+
+
+运行 nginx
+
+ln -s /usr/local/nginx/conf/nginx.conf /etc/nginx.conf //软连接
+
+mkdir -p /etc/nginx/conf.d/  //创建目录
+
+vim /etc/nginx.conf    //修改配置
+
+
+#######################################################
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+   include /etc/nginx/conf.d/*.conf;
+}
+###########################################################################
+cd /etc/nginx/conf.d/
+vim wode.conf
+##############################################
+server {
+        listen 80 default;
+        server_name 1314916.com;
+        rewrite ^(.*) http://www.1314916.com permanent;
+        location / {
+           root /web/wode/;
+           index  index.html index.php index.htm;
+        }
+}
+server {
+        listen 80;
+        server_name www.1314916.com;
+        location / {
+           root /web/wode/;
+           index  index.html index.php index.htm;
+        }
+}
+
+##################################################
+nginx -t
+nginx -s reload
+##################################################
+开启压缩
+
+gzip on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+#gzip_http_version 1.0;
+gzip_comp_level 2;
+gzip_types text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+gzip_vary off;
+gzip_disable "MSIE [1-6]\.";
+
+
+
+
+
+
+
+
+
+
+
+
