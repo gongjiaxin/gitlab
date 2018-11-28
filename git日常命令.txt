@@ -1,0 +1,43 @@
+查看远程分支
+git branch -a
+
+查看本地分支
+git branch 
+
+创建分支
+git branch test 
+
+切换分支到test
+git checkout test 
+
+删除本地分支
+git br -d test 
+
+提交代码
+git push -u origin master 
+
+1、git基本命令
+1）git add 将想要快照的内容写入缓存区
+2）git status -s "AM" 状态的意思是，这个文件在我们将它添加到缓存之后又有改动
+3）git commit -m '第一次版本提交' -m选项添加备注信息
+4）git clone url 使用 git clone 拷贝一个 Git 仓库到本地
+5）git diff 查看执行 git status 的结果的详细信息
+
+
+
+git rm file 会将条目从缓存区中移除
+
+2、git 分支管理
+1）创建分支命令 git branch (branchname) 列出分支 git branch
+2）切换分支命令 git checkout (branchname)
+3）合并分支 git merge (branchname)
+4）创建新分支并立即切换到该分支下 git checkout -b (branchname)
+5）删除分支命令 git branch -d (branchname)
+
+
+git init 
+$ git config --global user.name "John Doe"
+$ git config --global user.email admin@example.com
+
+
+git remote add origin git@47.99.145.156:front/eatjoys-front-erp.git
