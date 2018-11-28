@@ -1,0 +1,31 @@
+1、安装supervisor
+yum search setuptools
+
+yum install -y python-setuptools.noarch
+
+easy_install supervisor
+
+
+supervisorctld -c /etc/supervisor/supervisord.conf 
+
+vim /etc/rc.local
+
+
+vim /etc/supervisor/supervisord.conf 
+修改以下
+file=/var/run/supervisor.sock 
+pidfile=/var/run/supervisord.pid
+serverurl=unix:////var/run/supervisor.sock
+
+
+
+
+[program:eatjoys-middle-printer]
+;environment=PATH="/opt/py3/bin:%(ENV_PATH)s"
+directory=/work/middle/eatjoys-middle-printer
+command=java   -Xmn256m -Xms384m -Xmx512m  -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Djava.ext.dirs=./lib  com.yutuoit.framework.start.StartService -console -app=eatjoys-middle-printer
+autostart=true
+autorestart=true
+stdout_logfile=/work/var/logs/eatjoys-middle-printer.log
+stderr_logfile=/work/var/logs/eatjoys-middle-printer.error
+
