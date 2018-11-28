@@ -1,0 +1,15 @@
+docker search jumpserver
+
+docker pull jumpserver/jumpserver 
+
+docker run -d --restart=always -p 8888:80 -p 2222:2222 --name jumpserver jumpserver/jumpserver
+
+打开
+47.99.89.247:8888
+
+会话管理-终端管理-接受会话
+
+测试连接
+
+47.99.89.247:2222
+admin  admin
